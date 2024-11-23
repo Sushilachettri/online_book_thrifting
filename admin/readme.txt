@@ -13,7 +13,7 @@ This page  show the book category with book details where the admin manages the 
 
 
 Sales Report Page
-The page where the monthly sales report is shown and ready to print.
+The page where the  sales report is shown and ready to print.
 Users Page
 The page where the system admin manages the list of second hand book .
 
