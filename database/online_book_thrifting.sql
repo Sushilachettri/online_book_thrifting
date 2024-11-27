@@ -1,13 +1,11 @@
-
-
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2020 at 09:32 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.33
+-- Generation Time: Nov 27, 2024 at 03:38 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,15 +37,18 @@ CREATE TABLE `books` (
   `price` float NOT NULL,
   `image_path` text NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `books`
 --
 
 INSERT INTO `books` (`id`, `category_ids`, `title`, `author`, `description`, `qty`, `price`, `image_path`, `date_created`) VALUES
-(1, '4,1', 'Sample Book', 'Sample Author', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt dolor in odio aliquet placerat. Mauris vestibulum lacinia justo, at sollicitudin nisi pretium in. Vivamus et ex at purus placerat laoreet faucibus vitae enim. Sed nibh ex, varius congue augue vitae, ullamcorper porta lorem. Praesent ex nunc, faucibus id eros nec, dapibus tempor justo. Ut turpis urna, euismod ac tincidunt vitae, interdum vel purus. Etiam pellentesque leo eget commodo dignissim. Proin ac lorem id lorem euismod posuere eget eget ipsum.', 0, 2500, '1604631420_books-1419613.jpg', '2020-11-06 10:57:51'),
-(2, '1,2', 'Python Programming', 'Anthony Brun', 'A Step by Step Guide from Beginner to  Expert', 0, 1800, '1604631960_python_book.jpg', '2020-11-06 11:06:58');
+(1, '4', 'English Books', 'Durga Prasad Bhatta', 'SEE Grade X English Practice Book - Class 10 English Practice Book (New \r\nBased on the latest syllabus issued by CDC\r\n', 0, 450, '1732335360_english10.jpg', '2020-11-06 10:57:51'),
+(2, '3,2', 'Python Programming', 'Anthony Brun', 'A Step by Step Guide from Beginner to  Expert', 0, 800, '1604631960_python_book.jpg', '2020-11-06 11:06:58'),
+(3, '1', 'Biology', 'By: Alok Paudel, Dr. Narayan Prasad Ghimire, Mr. Alok Paudel, Rojan Tapol', 'Technical Biology with Practical Grade 11 (Plant/Animal Science)', 0, 400, '1732335600_Technical-Biology-With-Practical-11.jpg', '2024-11-23 10:05:16'),
+(4, '2', 'Marketing Management', 'Sushil Awale, Biksah Shrestha, Pranay Raj Acharya & Bhushan Dahal', 'This book being the first book on services marketing with Nepalese perspective in Nepal, it will be very useful for all managers and practitioners to enhance their knowledge on service marketing management. And definitely this book has accommodated complete syllabus of Tribhuvan University BBA, Purbanchal University BBA, Tribhuvan University MBS, and major part of other bachelor and MBA programs.', 0, 600, '1732335780_marketing-management.jpg', '2024-11-23 10:08:06'),
+(7, '1', 'Account', 'Dr. Yadav Raj Koirala', 'Specifications of Principles of Accounting Textbook for Class 11 Asmita New Syllabus', 0, 300, '1732354080_book2.jpg', '2024-11-23 15:13:16');
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,18 @@ CREATE TABLE `cart` (
   `qty` int(30) NOT NULL,
   `price` float NOT NULL,
   `customer_id` int(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `book_id`, `qty`, `price`, `customer_id`) VALUES
+(4, 1, 4, 2500, 2),
+(6, 5, 2, 700, 3),
+(8, 3, 5, 600, 1),
+(9, 5, 5, 300, 1),
+(10, 1, 1, 450, 1);
 
 -- --------------------------------------------------------
 
@@ -73,17 +85,17 @@ CREATE TABLE `categories` (
   `id` int(30) NOT NULL,
   `name` text NOT NULL,
   `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `description`) VALUES
-(1, 'Educational', 'Educational'),
-(2, 'Programming', 'Programming'),
-(3, 'Fantasy', 'Fantasy'),
-(4, 'Business', 'Business');
+(1, '+2 Books', '+2 books with different faculty'),
+(2, 'Master books', 'Master books '),
+(3, 'Bachelor Books', 'Bachelor Books with different faculty'),
+(4, 'School Books', 'School Books From class 1 to 10');
 
 -- --------------------------------------------------------
 
@@ -99,14 +111,16 @@ CREATE TABLE `customers` (
   `email` varchar(150) NOT NULL,
   `password` text NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`id`, `name`, `address`, `contact`, `email`, `password`, `date_created`) VALUES
-(1, 'John Smith', 'Sample address', '+18456-5455-55', 'jsmith@sample.com', '1254737c076cf867dc53d60a0364f38e', '2020-11-06 12:59:12');
+(1, 'sush Tandan', 'kathmandu', '9878787870', 'sush@gmail.com', 'cfa6036ef7743ed8137014558101205d', '2020-11-06 12:59:12'),
+(2, 'sushila', 'kathmandu', '9848080892', 'tandansushila16@gmail.com', 'fe3ec8a8cc95b4ae5e197d7f6575dde8', '2024-11-17 09:11:14'),
+(3, 'sushila ', 'kathmandu-balkhu', '9848080888', 'sushila@gmail.com', 'fe3ec8a8cc95b4ae5e197d7f6575dde8', '2024-11-23 09:47:35');
 
 -- --------------------------------------------------------
 
@@ -121,14 +135,16 @@ CREATE TABLE `orders` (
   `total_amount` float NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`id`, `customer_id`, `address`, `total_amount`, `status`, `date_created`) VALUES
-(1, 1, 'Sample address', 0, 1, '2020-11-06 15:26:12');
+(2, 3, 'kathmandu-balkhu', 0, 1, '2024-11-23 14:04:04'),
+(3, 3, 'kathmandu-balkhu', 0, 0, '2024-11-23 14:04:24'),
+(4, 1, 'kathmandu', 0, 0, '2024-11-23 14:32:04');
 
 -- --------------------------------------------------------
 
@@ -142,15 +158,15 @@ CREATE TABLE `order_list` (
   `book_id` int(30) NOT NULL,
   `qty` int(30) NOT NULL,
   `price` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `order_list`
 --
 
 INSERT INTO `order_list` (`id`, `order_id`, `book_id`, `qty`, `price`) VALUES
-(1, 1, 1, 4, 2500),
-(2, 1, 2, 3, 1800);
+(3, 2, 3, 3, 600),
+(4, 4, 3, 2, 600);
 
 -- --------------------------------------------------------
 
@@ -165,14 +181,14 @@ CREATE TABLE `system_settings` (
   `contact` varchar(20) NOT NULL,
   `cover_img` text NOT NULL,
   `about_content` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `system_settings`
 --
 
 INSERT INTO `system_settings` (`id`, `name`, `email`, `contact`, `cover_img`, `about_content`) VALUES
-(1, 'Online Book Store System', 'info@sample.com', '+18456-5455-55', '', '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt dolor in odio aliquet placerat. Mauris vestibulum lacinia justo, at sollicitudin nisi pretium in. Vivamus et ex at purus placerat laoreet faucibus vitae enim. Sed nibh ex, varius congue augue vitae, ullamcorper porta lorem. Praesent ex nunc, faucibus id eros nec, dapibus tempor justo. Ut turpis urna, euismod ac tincidunt vitae, interdum vel purus. Etiam pellentesque leo eget commodo dignissim. Proin ac lorem id lorem euismod posuere eget eget ipsum.&lt;/p&gt;&lt;p&gt;Nunc tincidunt augue eu ipsum aliquam venenatis. Vestibulum metus nunc, porta quis commodo id, consectetur id ipsum. Phasellus luctus tortor vitae nisl consectetur molestie. Sed varius ornare leo, sit amet faucibus turpis placerat non. Nam ipsum quam, dapibus vitae consequat vitae, molestie nec lacus. Praesent gravida lacus sed pellentesque posuere. Donec tincidunt urna nec magna pulvinar, et viverra leo dictum. Cras aliquet odio ac dapibus porttitor.&lt;/p&gt;&lt;p&gt;Suspendisse sed auctor enim, eu laoreet purus. Fusce aliquam nisl odio, condimentum commodo risus bibendum eu. Proin vitae felis sollicitudin, porta leo sit amet, pretium lorem. Proin facilisis egestas lacus, eu mollis felis egestas eget. Phasellus efficitur accumsan dolor, ut pharetra tortor posuere nec. Phasellus rutrum lacus in purus facilisis tempus. Donec a sapien a dolor varius rutrum in vel velit. Proin mattis porttitor commodo. Nam vitae porta diam, auctor lacinia nibh. Sed sodales commodo suscipit. Suspendisse eu lectus ac ligula fringilla auctor. Donec rutrum, lectus in cursus hendrerit, leo massa dignissim dui, eu tempus lacus est laoreet enim. Nunc lobortis condimentum vulputate.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;http://localhost/book_store/admin/assets/uploads/1604629260_books-1419613.jpg&quot; style=&quot;width: 465px;&quot; class=&quot;fr-fic fr-dib&quot;&gt;&lt;/p&gt;&lt;p&gt;Curabitur bibendum sem non sagittis sagittis. Fusce ac orci tincidunt, viverra enim id, posuere felis. Cras sed urna elit. Curabitur facilisis odio porta eros facilisis varius. Sed vulputate dolor ac venenatis porta. Suspendisse sit amet odio mollis, porta erat ut, venenatis velit. Nunc sollicitudin lorem vitae purus sodales malesuada. Maecenas pellentesque, nisl sed hendrerit venenatis, tortor augue commodo felis, non cursus risus massa pulvinar sapien. Aliquam vitae nisi et magna condimentum faucibus nec sit amet est. Etiam vulputate iaculis sodales. Fusce ut turpis ut ante laoreet interdum sed ac velit. Suspendisse lacinia felis erat, in lacinia risus volutpat id. Praesent egestas odio diam, ut congue quam sollicitudin laoreet. Aenean elit eros, dapibus id purus blandit, imperdiet vehicula augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam maximus elementum nulla nec consequat.&lt;/p&gt;&lt;p&gt;In aliquam tellus turpis. Etiam pretium ex cursus viverra interdum. Quisque maximus tortor lacus, nec ullamcorper risus bibendum nec. Mauris at ante dui. Vivamus eget suscipit ex. Nullam a purus tincidunt, molestie purus et, placerat enim. Mauris luctus erat sit amet suscipit luctus. Mauris lorem sapien, maximus sit amet varius nec, scelerisque sit amet felis. Phasellus et consequat metus. Sed suscipit aliquet ullamcorper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer nec pharetra nunc, a pretium libero. Etiam rhoncus ante nibh, a venenatis felis ullamcorper sit amet.&lt;/p&gt;');
+(1, 'Online Book Thrifting', 'onlinebookthrifting@gmail.com', '07151511', '', '&lt;p&gt;Welcome to Online Book Thrifting, where every book finds its next adventure!&lt;/p&gt;&lt;p&gt;We&amp;rsquo;re passionate about connecting book lovers with affordable, pre-loved books that inspire, educate, and entertain. At the heart of what we do is a love for stories both the ones printed on pages and the ones behind the books themselves.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;http://localhost/online_book_thrifting/admin/assets/uploads/1732353660_book3.jpg&quot; style=&quot;width: 1157px;&quot; class=&quot;fr-fic fr-dib&quot;&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;');
 
 -- --------------------------------------------------------
 
@@ -186,7 +202,7 @@ CREATE TABLE `users` (
   `username` varchar(200) NOT NULL,
   `password` text NOT NULL,
   `type` tinyint(1) NOT NULL COMMENT '1=Admin,2=Staff'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -255,13 +271,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -273,19 +289,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
