@@ -19,17 +19,5 @@ The page where the system admin manages the list of second hand book .
 
 The Online book thrifting System was developed using HTML, PHP/MySQLi, CSS, JavaScript (jQuery/Ajax), and Bootstrap for the design. The source code is fully functional and easy to modify or enhance. Follow the instruction below to have an actual experience using this simple project.
 
-How to Run
-Download the source code and extract the zip file.
-Download or set up any local web server that runs PHP script.
-Open the web-server database and create a new database name it Online_book_thrifting.
-Import the SQL file located in the database folder of the source code.
-Copy and paste the source code to the location where your local web server accessing your local projects. Example for XAMPP('C:\xampp\htdocs')
-Open a web browser and browse the project. E.g [http://localhost/online_book_thrifting]
-Admin Default Access
-Username: admin
 
-Password: admin123
-
-I hope this simple online book thrifting  System will help you with what you are looking for.
 
